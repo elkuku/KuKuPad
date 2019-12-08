@@ -17,7 +17,7 @@ if (Encore.isProduction()) {
 } else {
 // if (!Encore.isProduction()) {
 // this is your *true* public path
-    Encore.setPublicPath('/symfony-starter/public/build')
+    Encore.setPublicPath('/kukupad/public/build')
 
     // this is now needed so that your manifest.json keys are still `build/foo.js`
     // (which is a file that's used by Symfony's `asset()` function)
@@ -38,8 +38,8 @@ if (Encore.isProduction()) {
  * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
  */
 Encore.addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+
+    .addEntry('editor', './assets/js/editor.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
