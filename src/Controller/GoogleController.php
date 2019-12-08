@@ -42,6 +42,6 @@ class GoogleController extends AbstractController
      */
     public function connectCheckAction(Request $request, ClientRegistry $clientRegistry): RedirectResponse
     {
-        return $this->redirectToRoute('your_homepage_route');
+        return $this->redirectToRoute('default');
     }
 }
