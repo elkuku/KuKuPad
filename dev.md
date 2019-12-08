@@ -16,3 +16,4 @@
     bin/console make:auth
     
 * https://hugo-soltys.com/blog/easily-implement-google-login-with-symfony-4
+..
