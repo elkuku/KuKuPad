@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
-
+    <link rel="icon" type="image/x-icon" href="
+    {% if 'dev' == app.environment %}
+        {{ asset('favicon-dev.ico') }}
+    {% else %}
+        {{ asset('favicon.ico') }}
+    {% endif %}
+    "/>
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     {% block stylesheets %}
@@ -19,10 +24,13 @@
 {% include '_menu.html.twig' %}
 
 <main role="main" class="container">
+    <noscript><h1 class="alert alert-danger">Please activate Javascript</h1></noscript>
+    {% include ('_flash-messages.html.twig') %}
     {% block body %}{% endblock %}
 </main>
-
+{% include ('_footer.html.twig') %}
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
+</html>
