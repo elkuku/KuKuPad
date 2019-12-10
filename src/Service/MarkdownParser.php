@@ -3,24 +3,26 @@
 namespace App\Service;
 
 use App\Repository\AgentRepository;
+use App\Repository\PageRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
 {
     /**
-     * @var AgentRepository
-     */
-    private $agentRepository;
-    /**
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
 
-    public function __construct(AgentRepository $agentRepository, UrlGeneratorInterface $urlGenerator)
+    /**
+     * @var PageRepository
+     */
+    private $pageRepository;
+
+    public function __construct(PageRepository $pageRepository, UrlGeneratorInterface $urlGenerator)
     {
         parent::__construct();
-        $this->agentRepository = $agentRepository;
         $this->urlGenerator = $urlGenerator;
+        $this->pageRepository = $pageRepository;
     }
 
     public function transform($text)
@@ -35,21 +37,23 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
     private function replaceAgentName($text): string
     {
         $text = preg_replace_callback(
-            '/@([a-zA-Z0-9]+)/',
+            '/\[\[([a-zA-Z0-9]+)\]\]/',
             function ($agentName) {
-                $agent = $this->agentRepository->findOneByNickName($agentName[1]);
+                $agent = $this->pageRepository->findOneBySlug($agentName[1]);
 
                 if (!$agent) {
-                    return '<code>'.$agentName[0].'</code>';
+                    return '<code>'.$agentName[1].'</code>';
                 }
 
-                $url = $this->urlGenerator->generate('agent_show', array('id' => $agent->getId()));
+                $url = $this->urlGenerator->generate('page_show2', ['slug' => $agent->getSlug()]);
 
-                $linkText = sprintf(
-                    '<img src="/build/images/logos/%s.svg" style="height: 32px" alt="logo"> %s',
-                    $agent->getFaction()->getName(),
-                    $agentName[0]
-                );
+                $linkText = $agentName[1];
+
+                // $linkText = sprintf(
+                //     '<img src="/build/images/logos/%s.svg" style="height: 32px" alt="logo"> %s',
+                //     $agent->getFaction()->getName(),
+                //     $agentName[0]
+                // );
 
                 return sprintf('<a href="%s">%s</a>', $url, $linkText);
             },
