@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Form\PageType;
 use App\Repository\PageRepository;
+use App\Service\Slugger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/page")
+ * @IsGranted("ROLE_ADMIN")
  */
 class PageController extends AbstractController
 {
@@ -20,9 +23,11 @@ class PageController extends AbstractController
      */
     public function index(PageRepository $pageRepository): Response
     {
-        return $this->render('page/index.html.twig', [
-            'pages' => $pageRepository->findAll(),
-        ]);
+        return $this->render(
+            'page/index.html.twig', [
+                'pages' => $pageRepository->findAll(),
+            ]
+        );
     }
 
     /**
@@ -35,6 +40,7 @@ class PageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $page->setSlug(Slugger::slugify($page->getTitle()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($page);
             $entityManager->flush();
@@ -42,10 +48,12 @@ class PageController extends AbstractController
             return $this->redirectToRoute('page_index');
         }
 
-        return $this->render('page/new.html.twig', [
-            'page' => $page,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'page/new.html.twig', [
+                'page' => $page,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -53,9 +61,21 @@ class PageController extends AbstractController
      */
     public function show(Page $page): Response
     {
-        return $this->render('page/show.html.twig', [
-            'page' => $page,
-        ]);
+        return $this->render('page/show.html.twig', ['page' => $page,]);
+    }
+
+    /**
+     * @Route("/show/{slug}", name="page_show2", methods={"GET"})
+     */
+    public function show2(string $slug, PageRepository $helpRepository): Response
+    {
+        $page = $helpRepository->findOneBy(['slug' => $slug]);
+
+        if (!$page) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('page/show.html.twig', ['page' => $page,]);
     }
 
     /**
@@ -67,15 +87,19 @@ class PageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $page->setSlug(Slugger::slugify($page->getTitle()));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('page_index');
         }
 
-        return $this->render('page/edit.html.twig', [
-            'page' => $page,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'page/edit.html.twig', [
+                'page' => $page,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -83,7 +107,10 @@ class PageController extends AbstractController
      */
     public function delete(Request $request, Page $page): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$page->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid(
+            'delete'.$page->getId(), $request->request->get('_token')
+        )
+        ) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($page);
             $entityManager->flush();

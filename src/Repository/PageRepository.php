@@ -36,15 +36,24 @@ class PageRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Page
+    public function findOneBySlug(string $value): ?Page
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.slug = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    public function SearchByTitle(string $title)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('LOWER(p.title) LIKE LOWER(:val)')
+            ->setParameter('val', '%'.$title.'%')
+            ->orderBy('a.title', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 }
