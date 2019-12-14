@@ -23,17 +23,31 @@
             {% endif %}
         </ul>
         <ul class="navbar-nav mt-2 mt-md-0">
-            {% if not app.user %}
+             {% if is_granted('ROLE_USER') %}
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                       role="button">
+                        {{ app.user.username }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                        <a class="dropdown-item nav-link" href={{ path('default') }}><span
+                                    class="oi oi-person"></span> {{ 'My Profile'|trans }}</a>
+                        <a class="dropdown-item nav-link" href={{ path('default') }}><span
+                                    class="oi oi-graph"></span> {{ 'My Stats'|trans }}</a>
+                        <a class="dropdown-item nav-link" href={{ path('default') }}><span
+                                    class="oi oi-cloud-upload"></span> {{ 'Import Stats'|trans }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item nav-link" href="{{ path('app_logout') }}"><span
+                                    class="oi oi-account-logout"></span> {{ 'Logout'|trans }}</a>
+                    </div>
+                </li>
+            {% else %}
                 <li class="nav-item">
                     {% if 'dev' == app.environment %}
                         <a class="nav-link" href="{{ path('app_login') }}">Login</a>
                     {% else %}
                         <a class="nav-link" href="{{ path('connect_google_start') }}">G-Login</a>
                     {% endif %}
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                 </li>
             {% endif %}
         </ul>

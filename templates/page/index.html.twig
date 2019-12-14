@@ -3,6 +3,8 @@
 {% block title %}Page index{% endblock %}
 
 {% block body %}
+    <a class="btn btn-outline-success float-right" href="{{ path('page_new') }}">Create new</a>
+
     <h1>Page index</h1>
 
     <table class="table">
@@ -30,6 +32,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('page_new') }}">Create new</a>
 {% endblock %}
