@@ -12,12 +12,16 @@ use League\OAuth2\Client\Provider\GoogleUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class GoogleAuthenticator extends SocialAuthenticator
 {
+    use TargetPathTrait;
+
     /**
      * @var ClientRegistry
      */
@@ -32,12 +36,17 @@ class GoogleAuthenticator extends SocialAuthenticator
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
 
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, UserRepository $userRepository)
+    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, UserRepository $userRepository, UrlGeneratorInterface $urlGenerator)
     {
         $this->clientRegistry = $clientRegistry;
         $this->em = $em;
         $this->userRepository = $userRepository;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -108,8 +117,12 @@ class GoogleAuthenticator extends SocialAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        // on success, let the request continue
-        return null;
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+
+        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        return new RedirectResponse($this->urlGenerator->generate('default'));
     }
 
     /**
