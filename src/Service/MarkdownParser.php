@@ -37,7 +37,7 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
     private function replaceLocalLink($text): string
     {
         $text = preg_replace_callback(
-            '/\[\[([a-zA-Z0-9]+)\]\]/',
+            '/\[\[([a-zA-Z0-9\s\-]+)\]\]/',
             function ($link) {
                 $page = $this->pageRepository->findOneBySlug(Slugger::slugify($link[1]));
 

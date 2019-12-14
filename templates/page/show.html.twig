@@ -2,6 +2,16 @@
 
 {% block title %}{{ 'Help'|trans }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('page') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('page') }}
+{% endblock %}
+
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
         <div class="btn-group float-right">

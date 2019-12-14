@@ -40,6 +40,7 @@ if (Encore.isProduction()) {
 Encore.addEntry('app', './assets/js/app.js')
 
     .addEntry('editor', './assets/js/editor.js')
+    .addEntry('page', './assets/js/page.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

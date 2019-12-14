@@ -1,6 +1,8 @@
 const $ = require('jquery')
+const hljs = require('highlight.js')
 
 require('../css/editor.css')
+require('highlight.js/styles/a11y-dark.css')
 
 const jsData = $('#js-data')
 
@@ -17,6 +19,10 @@ $('a[data-toggle="tab"]').on('click', function (e) {
             {text: $(editorField).val()},
             function (r) {
                 out.html(r.data).removeClass('loading')
+                // hljs.highlightBlock(out)
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
             }
         )
     }

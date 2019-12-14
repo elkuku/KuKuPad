@@ -18,5 +18,7 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "dependencies": {}
+    "dependencies": {
+        "highlight.js": "^9.17.1"
+    }
 }
