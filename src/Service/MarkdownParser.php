@@ -47,7 +47,7 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
                     $linkText = $link[1];
                     $cssClass = 'text-danger';
                 } else {
-                    $url = $this->urlGenerator->generate('page_show2', ['slug' => $page->getSlug()]);
+                    $url = $this->urlGenerator->generate('wiki', ['slug' => $page->getSlug()]);
 
                     $linkText = $link[1];
                     $cssClass = '';
