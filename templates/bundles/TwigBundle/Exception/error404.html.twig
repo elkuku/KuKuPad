@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>¡Oh No!</h1>
+
+    <h3>Page not found :(</h3>
+
+    <p class="alert alert-warning">
+        {{ exception.message }}
+    </p>
+{% endblock %}
