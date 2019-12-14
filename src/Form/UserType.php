@@ -19,20 +19,21 @@ class UserType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices'  => [
-                        'Admin'  => 'ROLE_ADMIN',
+                        'Admin' => 'ROLE_ADMIN',
                         // 'Editor' => 'ROLE_EDITOR',
                         'User'  => 'ROLE_USER',
                     ],
                     'multiple' => true,
                 ]
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => User::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class,
+            ]
+        );
     }
 }

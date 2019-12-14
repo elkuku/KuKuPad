@@ -76,6 +76,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "trans": [
+            "./bin/console translation:update en --output-format=yaml --force"
         ]
     },
     "conflict": {

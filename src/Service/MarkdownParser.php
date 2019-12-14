@@ -29,33 +29,31 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
     {
         $text = parent::transform($text);
 
-        $text = $this->replaceAgentName($text);
+        $text = $this->replaceLocalLink($text);
 
         return $text;
     }
 
-    private function replaceAgentName($text): string
+    private function replaceLocalLink($text): string
     {
         $text = preg_replace_callback(
             '/\[\[([a-zA-Z0-9]+)\]\]/',
-            function ($agentName) {
-                $agent = $this->pageRepository->findOneBySlug($agentName[1]);
+            function ($link) {
+                $page = $this->pageRepository->findOneBySlug(Slugger::slugify($link[1]));
 
-                if (!$agent) {
-                    return '<code>'.$agentName[1].'</code>';
+                if (!$page) {
+                    $url = $this->urlGenerator->generate('page_new', ['title' => $link[1]]);
+
+                    $linkText = $link[1];
+                    $cssClass = 'text-danger';
+                } else {
+                    $url = $this->urlGenerator->generate('page_show2', ['slug' => $page->getSlug()]);
+
+                    $linkText = $link[1];
+                    $cssClass = '';
                 }
 
-                $url = $this->urlGenerator->generate('page_show2', ['slug' => $agent->getSlug()]);
-
-                $linkText = $agentName[1];
-
-                // $linkText = sprintf(
-                //     '<img src="/build/images/logos/%s.svg" style="height: 32px" alt="logo"> %s',
-                //     $agent->getFaction()->getName(),
-                //     $agentName[0]
-                // );
-
-                return sprintf('<a href="%s">%s</a>', $url, $linkText);
+                return sprintf('<a class="%s" href="%s">%s</a>', $cssClass, $url, $linkText);
             },
             $text
         );

@@ -15,18 +15,19 @@ class PageType extends AbstractType
             ->add('title')
             ->add(
                 'text', null, [
-                'attr'       => ['rows' => 10],
-                'label'      => 'label.content',
-                'block_name' => 'editor',
-            ]
-            )
-        ;
+                    'attr'       => ['rows' => 10],
+                    'label'      => 'label.content',
+                    'block_name' => 'editor',
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Page::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Page::class,
+            ]
+        );
     }
 }

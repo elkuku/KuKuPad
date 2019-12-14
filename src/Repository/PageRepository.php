@@ -42,8 +42,7 @@ class PageRepository extends ServiceEntityRepository
             ->andWhere('p.slug = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 
     public function SearchByTitle(string $title)

@@ -31,11 +31,14 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="page_new", methods={"GET","POST"})
+     * @Route("/new/{title}", name="page_new", methods={"GET","POST"}, defaults={"title"="New Page"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, string $title): Response
     {
         $page = new Page();
+        if ($title) {
+            $page->setTitle($title);
+        }
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
 
