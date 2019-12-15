@@ -35,4 +35,9 @@ class MarkdownHelper
 
         return $item->get();
     }
+
+    public function clearCache(): bool
+    {
+        return $this->cache->clear();
+    }
 }

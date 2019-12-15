@@ -6,11 +6,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            {% if is_granted('ROLE_USER') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('wiki') }}">Wiki</a>
-                </li>
-            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -18,6 +13,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{ path('user_index') }}">{{ 'Users'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('page_index') }}">{{ 'Pages'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('markdown_clear_cache') }}">{{ 'Clear Cache'|trans }}</a>
                     </div>
                 </li>
             {% endif %}
