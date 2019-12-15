@@ -32,4 +32,18 @@ class Markdown extends AbstractController
             ]
         );
     }
+
+    /**
+     * @Route("/clearcache", name="markdown_clear_cache")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function clearCache(MarkdownHelper $markdownHelper)
+    {
+        if (!$markdownHelper->clearCache()) {
+            throw new \UnexpectedValueException('Can not clear the cache!');
+        }
+
+        $this->addFlash('success', 'Cache has been cleared.');
+        return $this->redirectToRoute('default');
+    }
 }

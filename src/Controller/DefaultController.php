@@ -13,6 +13,10 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('wiki');
+        }
+
         return $this->render('default/index.html.twig', []);
     }
 }
