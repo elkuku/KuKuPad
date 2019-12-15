@@ -19,6 +19,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "highlight.js": "^9.17.1"
+        "highlight.js": "^9.17.1",
+        "open-iconic": "^1.1.1"
     }
 }
