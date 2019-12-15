@@ -1,16 +1,10 @@
 {% block footer %}
     <footer class="fixed-bottom footer text-muted d-flex flex-row bg-dark">
         <div class="p-1">
-            &copy; 2018 - {{ "now"|date("Y") }} by 4E - Ecuador
+            &copy; 2019 - {{ "now"|date("Y") }} by <a href="https://github.com/elkuku">elkuku</a>
         </div>
         <div class="p-1 ml-auto">
-            {% if 'dev' == app.environment %}
-                {% if not app.user %}
-                    <a style="color: #00B8F5;" href="{{ path('app_login') }}">dev login</a>
-                {% else %}
-                    <a style="color: #00B8F5;" href="{{ path('app_logout') }}">dev logout</a>
-                {% endif %}
-            {% endif %}
+            &hellip;
         </div>
         <div class="p-1 ml-auto">
             Made with <a href="https://symfony.com">Symfony</a>
