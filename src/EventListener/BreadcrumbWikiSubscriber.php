@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use App\Repository\PageRepository;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -25,12 +26,17 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
+    /**
+     * @var PageRepository
+     */
+    private $pageRepository;
 
-    public function __construct(AdapterInterface $cache, Breadcrumbs $breadcrumbs, UrlGeneratorInterface $urlGenerator)
+    public function __construct(PageRepository $pageRepository, AdapterInterface $cache, Breadcrumbs $breadcrumbs, UrlGeneratorInterface $urlGenerator)
     {
         $this->cache = $cache;
         $this->breadcrumbs = $breadcrumbs;
         $this->urlGenerator = $urlGenerator;
+        $this->pageRepository = $pageRepository;
     }
 
     public static function getSubscribedEvents(): array
@@ -50,6 +56,10 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 
         $url = $this->urlGenerator->generate('wiki', ['slug' => $slug]);
 
+        $page = $this->pageRepository->findOneBySlug($slug);
+
+        $text = $page ? $page->getTitle() : $slug;
+
         try {
             $item = $this->cache->getItem('breadcrumbs');
         } catch (InvalidArgumentException $e) {
@@ -58,17 +68,17 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 
         if ($item->isHit()) {
             $values = $item->get();
-            if (array_key_exists($slug, $values)) {
-                unset($values[$slug]);
+            if (array_key_exists($text, $values)) {
+                unset($values[$text]);
             }
-            $values[$slug] = $url;
+            $values[$text] = $url;
             foreach ($values as $itemText => $itemUrl) {
-                $this->breadcrumbs->addItem($itemText, $itemUrl);
+                $this->breadcrumbs->addItem($itemText, $itemUrl, [], false);
             }
             $item->set($values);
         } else {
-            $item->set([$slug => $url]);
-            $this->breadcrumbs->addItem($slug, $url);
+            $item->set([$text => $url]);
+            $this->breadcrumbs->addItem($text, $url, [], false);
         }
 
         // $item->set([]);
