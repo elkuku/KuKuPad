@@ -15,7 +15,7 @@ class WikiController extends AbstractController
     /**
      * @Route("/{slug}", name="wiki", defaults={"slug"="default"})
      */
-    public function index(PageRepository $pageRepository, string $slug)
+    public function index(PageRepository $pageRepository, string $slug): Response
     {
         $page = $pageRepository->findOneBy(['slug' => $slug]);
 

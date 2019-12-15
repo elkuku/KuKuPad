@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block body %}
+    {{ wo_render_breadcrumbs() }}
     {% if is_granted('ROLE_ADMIN') %}
         <div class="btn-group float-right">
             <a class="btn btn-outline-info" href="{{ path('page_edit', {'id': page.id}) }}">{{ 'Edit'|trans }}</a>
