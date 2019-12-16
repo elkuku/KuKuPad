@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'Help'|trans }}{% endblock %}
+{% block title %}{{ parent() }}{{ page.title == 'default' ? '' : ' - ' ~page.title }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}

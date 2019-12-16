@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page index{% endblock %}
+{% block title %}{{ parent() }} - Page index{% endblock %}
 
 {% block body %}
     <a class="btn btn-outline-success float-right" href="{{ path('page_new') }}">Create new</a>

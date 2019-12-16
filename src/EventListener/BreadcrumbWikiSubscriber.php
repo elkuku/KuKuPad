@@ -54,15 +54,17 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $url = $this->urlGenerator->generate('wiki', ['slug' => $slug]);
-
         $page = $this->pageRepository->findOneBySlug($slug);
 
-        $text = $page ? $page->getTitle() : $slug;
-
-        if ('default' === $slug) {
-            $text = $_ENV['APP_WIKI_NAME'];
+        if (!$page) {
+            return;
         }
+
+        $url = $this->urlGenerator->generate('wiki', ['slug' => $slug]);
+
+        $text = 'default' === $slug
+            ? $_ENV['APP_WIKI_NAME']
+            : $page->getTitle();
 
         try {
             $item = $this->cache->getItem('breadcrumbs');

@@ -1,4 +1,6 @@
 twig:
+    globals:
+        default_name: '%env(APP_WIKI_NAME)%'
     default_path: '%kernel.project_dir%/templates'
     form_themes:
         - 'bootstrap_4_layout.html.twig'
