@@ -12,7 +12,7 @@
                        role="button">{{ 'Manage'|trans }}</a>
                     <div class="dropdown-menu">
                         {% if is_granted('ROLE_ADMIN') %}
-                        <a class="dropdown-item" href="{{ path('user_index') }}">{{ 'Users'|trans }}</a>
+                            <a class="dropdown-item" href="{{ path('user_index') }}">{{ 'Users'|trans }}</a>
                         {% endif %}
                         <a class="dropdown-item" href="{{ path('page_index') }}">{{ 'Pages'|trans }}</a>
                         <a class="dropdown-item" href="{{ path('markdown_clear_cache') }}">{{ 'Clear Cache'|trans }}</a>
@@ -21,7 +21,7 @@
             {% endif %}
         </ul>
         <ul class="navbar-nav mt-2 mt-md-0">
-             {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_USER') %}
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
                        role="button">

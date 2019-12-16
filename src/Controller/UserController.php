@@ -24,8 +24,8 @@ class UserController extends AbstractController
     {
         return $this->render(
             'user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]
+                'users' => $userRepository->findAll(),
+            ]
         );
     }
 
@@ -48,9 +48,9 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
         );
     }
 
@@ -61,8 +61,8 @@ class UserController extends AbstractController
     {
         return $this->render(
             'user/show.html.twig', [
-            'user' => $user,
-        ]
+                'user' => $user,
+            ]
         );
     }
 
@@ -82,9 +82,9 @@ class UserController extends AbstractController
 
         return $this->render(
             'user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
         );
     }
 

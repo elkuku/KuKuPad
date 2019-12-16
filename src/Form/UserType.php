@@ -19,10 +19,10 @@ class UserType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices'  => [
-                        'Admin' => 'ROLE_ADMIN',
+                        'Admin'  => 'ROLE_ADMIN',
                         'Editor' => 'ROLE_EDITOR',
                         'Reader' => 'ROLE_READER',
-                        'User'  => 'ROLE_USER',
+                        'User'   => 'ROLE_USER',
                     ],
                     'multiple' => true,
                 ]
