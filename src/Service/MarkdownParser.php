@@ -29,6 +29,8 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
     {
         $text = parent::transform($text);
 
+        $text = str_replace('<a href', '<a class="external" href', $text);
+
         $text = $this->replaceLocalLink($text);
 
         return $text;

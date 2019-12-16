@@ -11,3 +11,8 @@ body {
   background-color: #4d4d4d;
   color: #9fbd00;
 }
+
+a.external {
+  background: url(/build/images/external.png) center right no-repeat;
+  padding-right: 13px;
+}

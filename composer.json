@@ -80,7 +80,7 @@
             "@auto-scripts"
         ],
         "trans": [
-            "./bin/console translation:update en --output-format=yaml --force"
+            "./bin/console translation:update en --output-format=yaml --force --sort=asc"
         ]
     },
     "conflict": {

@@ -10,18 +10,19 @@ Encore.setOutputPath('public/build/')
 // directory where compiled assets will be stored
 
 // public path used by the web server to access the output path
+Encore.setPublicPath('/build')
 
 if (Encore.isProduction()) {
 
-    Encore.setPublicPath('/build')
+    // Encore.setPublicPath('/build')
 } else {
 // if (!Encore.isProduction()) {
 // this is your *true* public path
-    Encore.setPublicPath('/kukupad/public/build')
+//     Encore.setPublicPath('/kukupad/public/build')
 
     // this is now needed so that your manifest.json keys are still `build/foo.js`
     // (which is a file that's used by Symfony's `asset()` function)
-    Encore.setManifestKeyPrefix('build')
+    // Encore.setManifestKeyPrefix('build')
 
 }
 
@@ -85,5 +86,18 @@ Encore.addEntry('app', './assets/js/app.js')
 // uncomment if you use API Platform Admin (composer req api-admin)
 //.enableReactPreset()
 //.addEntry('admin', './assets/js/admin.js')
+
+    .copyFiles({
+        from: './assets/images',
+
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+
+        // if versioning is enabled, add the file hash too
+        //to: 'images/[path][name].[hash:8].[ext]',
+
+        // only copy files matching this pattern
+        //pattern: /\.(png|jpg|jpeg)$/
+    })
 
 module.exports = Encore.getWebpackConfig()
