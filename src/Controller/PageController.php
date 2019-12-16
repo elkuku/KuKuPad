@@ -104,7 +104,7 @@ class PageController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('page_index');
+            return $this->redirectToRoute('wiki', ['slug' => $page->getSlug()]);
         }
 
         return $this->render(
