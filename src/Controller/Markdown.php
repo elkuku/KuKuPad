@@ -6,6 +6,7 @@ use App\Service\MarkdownHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,13 +38,14 @@ class Markdown extends AbstractController
      * @Route("/clearcache", name="markdown_clear_cache")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function clearCache(MarkdownHelper $markdownHelper)
+    public function clearCache(MarkdownHelper $markdownHelper): RedirectResponse
     {
         if (!$markdownHelper->clearCache()) {
             throw new \UnexpectedValueException('Can not clear the cache!');
         }
 
         $this->addFlash('success', 'Cache has been cleared.');
+
         return $this->redirectToRoute('default');
     }
 }

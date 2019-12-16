@@ -15,7 +15,7 @@ class WikiController extends AbstractController
     /**
      * @Route("/{slug}", name="wiki", defaults={"slug"="default"})
      */
-    public function index(PageRepository $pageRepository, string $slug): Response
+    public function wiki(PageRepository $pageRepository, string $slug): Response
     {
         $page = $pageRepository->findOneBy(['slug' => $slug]);
 
@@ -27,6 +27,11 @@ class WikiController extends AbstractController
             throw $this->createNotFoundException('The page does not exist');
         }
 
-        return $this->render('page/show.html.twig', ['page' => $page,]);
+        return $this->render(
+            'page/show.html.twig', [
+                'page'          => $page,
+                'default_title' => $_ENV['APP_WIKI_NAME'],
+            ]
+        );
     }
 }

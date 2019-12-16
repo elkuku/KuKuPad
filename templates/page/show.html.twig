@@ -21,10 +21,13 @@
         </div>
     {% endif %}
 
-    {% if page.title != 'default' %}
-    <h2>{{ page.title }}</h2>
+    {% if page.title == 'default' %}
+        <h2>{{ default_title ?? 'Wiki' }}</h2>
+    {% else %}
+        <h2>{{ page.title }}</h2>
     {% endif %}
 
     {{ page.text|md2html }}
+    {#    <img src="https://drive.google.com/uc?id=1n1CYGNgd2Rsho7ABYnl72gKVx-8-R9Sf" alt="lala" style="width: 250px">#}
 
 {% endblock %}

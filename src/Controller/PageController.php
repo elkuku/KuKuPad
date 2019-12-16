@@ -64,7 +64,12 @@ class PageController extends AbstractController
      */
     public function show(Page $page): Response
     {
-        return $this->render('page/show.html.twig', ['page' => $page,]);
+        return $this->render(
+            'page/show.html.twig', [
+            'page'          => $page,
+            'default_title' => $_ENV['APP_WIKI_NAME'],
+        ]
+        );
     }
 
     /**
@@ -78,7 +83,12 @@ class PageController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        return $this->render('page/show.html.twig', ['page' => $page,]);
+        return $this->render(
+            'page/show.html.twig', [
+            'page'          => $page,
+            'default_title' => $_ENV['APP_WIKI_NAME'],
+        ]
+        );
     }
 
     /**

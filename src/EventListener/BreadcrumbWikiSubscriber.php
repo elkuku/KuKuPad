@@ -60,6 +60,10 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 
         $text = $page ? $page->getTitle() : $slug;
 
+        if ('default' === $slug) {
+            $text = $_ENV['APP_WIKI_NAME'];
+        }
+
         try {
             $item = $this->cache->getItem('breadcrumbs');
         } catch (InvalidArgumentException $e) {
