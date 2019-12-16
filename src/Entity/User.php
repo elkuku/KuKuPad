@@ -59,7 +59,10 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = json_decode($this->roles);
+        $roles = is_string($this->roles)
+            ? json_decode($this->roles, true)
+            : $this->roles;
+
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
@@ -68,7 +71,7 @@ class User implements UserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles = json_encode($roles);
 
         return $this;
     }

@@ -19,7 +19,7 @@ class Markdown extends AbstractController
      * Converts a markdown string to HTML.
      *
      * @Route("/preview", name="markdown_preview")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_EDITOR")
      */
     public function preview(Request $request, MarkdownHelper $markdownHelper): JsonResponse
     {
@@ -36,7 +36,7 @@ class Markdown extends AbstractController
 
     /**
      * @Route("/clearcache", name="markdown_clear_cache")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_EDITOR")
      */
     public function clearCache(MarkdownHelper $markdownHelper): RedirectResponse
     {

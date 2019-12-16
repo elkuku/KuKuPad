@@ -14,7 +14,7 @@
 
 {% block body %}
     {{ wo_render_breadcrumbs() }}
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_EDITOR') %}
         <div class="btn-group float-right">
             <a class="btn btn-outline-info" href="{{ path('page_edit', {'id': page.id}) }}">{{ 'Edit'|trans }}</a>
             {{ include('page/_delete_form.html.twig') }}

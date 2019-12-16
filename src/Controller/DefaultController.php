@@ -13,7 +13,7 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_READER')) {
             return $this->redirectToRoute('wiki');
         }
 

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PageRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ class WikiController extends AbstractController
 {
     /**
      * @Route("/{slug}", name="wiki", defaults={"slug"="default"})
+     * @IsGranted("ROLE_READER")
      */
     public function wiki(PageRepository $pageRepository, string $slug): Response
     {

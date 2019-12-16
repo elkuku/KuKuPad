@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "knplabs/knp-markdown-bundle": "^1.8",
         "knpuniversity/oauth2-client-bundle": "^1.31",
         "league/oauth2-google": "^3.0",

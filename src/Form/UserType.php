@@ -20,7 +20,8 @@ class UserType extends AbstractType
                 [
                     'choices'  => [
                         'Admin' => 'ROLE_ADMIN',
-                        // 'Editor' => 'ROLE_EDITOR',
+                        'Editor' => 'ROLE_EDITOR',
+                        'Reader' => 'ROLE_READER',
                         'User'  => 'ROLE_USER',
                     ],
                     'multiple' => true,

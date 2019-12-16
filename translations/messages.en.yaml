@@ -1,4 +1,3 @@
-Admin: Admin
 Users: Users
 Pages: Pages
 Title: Title
@@ -9,6 +8,5 @@ Help: Help
 Edit: Edit
 'Clear Cache': 'Clear Cache'
 'My Profile': 'My Profile'
-'My Stats': 'My Stats'
-'Import Stats': 'Import Stats'
 Logout: Logout
+Manage: Manage

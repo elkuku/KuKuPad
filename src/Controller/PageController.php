@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/page")
- * @IsGranted("ROLE_ADMIN")
+ * @IsGranted("ROLE_EDITOR")
  */
 class PageController extends AbstractController
 {
