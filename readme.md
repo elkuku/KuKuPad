@@ -6,6 +6,7 @@ A Mardown "Wiki"
 composer install
 yarn
 yarn dev
+bin/start
 
 bin/console doctrine:fixtures:load
 
