@@ -1,8 +1,10 @@
 {
     "type": "project",
     "license": "proprietary",
+    "name": "elkuku/kukupad",
+    "description": "A markdown wiki",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -90,7 +92,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "5.1.*"
+            "require": "5.2.*"
         }
     }
 }
