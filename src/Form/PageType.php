@@ -14,7 +14,9 @@ class PageType extends AbstractType
         $builder
             ->add('title')
             ->add(
-                'text', null, [
+                'text',
+                null,
+                [
                     'attr'       => ['rows' => 10],
                     'label'      => 'label.content',
                     'block_name' => 'editor',

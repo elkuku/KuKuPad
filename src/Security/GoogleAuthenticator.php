@@ -22,8 +22,12 @@ class GoogleAuthenticator extends SocialAuthenticator
 {
     use TargetPathTrait;
 
-    public function __construct(private ClientRegistry $clientRegistry, private EntityManagerInterface $em, private UserRepository $userRepository, private UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        private ClientRegistry $clientRegistry,
+        private EntityManagerInterface $em,
+        private UserRepository $userRepository,
+        private UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     /**
@@ -46,7 +50,7 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param mixed                 $credentials
+     * @param mixed $credentials
      *
      * @return User|null|object|\Symfony\Component\Security\Core\User\UserInterface
      */
@@ -59,7 +63,9 @@ class GoogleAuthenticator extends SocialAuthenticator
         $email = $googleUser->getEmail();
 
         // 1) have they logged in with Google before? Easy!
-        $user = $this->userRepository->findOneBy(['email' => $googleUser->getEmail()]);
+        $user = $this->userRepository->findOneBy(
+            ['email' => $googleUser->getEmail()]
+        );
 
         if (!$user) {
             $user = new User();
@@ -81,13 +87,20 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param string         $providerKey
+     * @param string $providerKey
      *
      * @return null|Response
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        $providerKey
+    ) {
+        if ($targetPath = $this->getTargetPath(
+            $request->getSession(),
+            $providerKey
+        )
+        ) {
             return new RedirectResponse($targetPath);
         }
 
@@ -99,9 +112,14 @@ class GoogleAuthenticator extends SocialAuthenticator
      *
      * @return null|Response
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
-        $message = strtr($exception->getMessageKey(), $exception->getMessageData());
+    public function onAuthenticationFailure(
+        Request $request,
+        AuthenticationException $exception
+    ) {
+        $message = strtr(
+            $exception->getMessageKey(),
+            $exception->getMessageData()
+        );
 
         return new Response($message, Response::HTTP_FORBIDDEN);
     }
@@ -111,12 +129,16 @@ class GoogleAuthenticator extends SocialAuthenticator
      * This redirects to the 'login'.
      *
      * @param AuthenticationException|null $authException
+     *
      * @return RedirectResponse
      */
-    public function start(Request $request, AuthenticationException $authException = null)
-    {
+    public function start(
+        Request $request,
+        AuthenticationException $authException = null
+    ) {
         return new RedirectResponse(
-            '/connect/', // might be the site, where users choose their oauth provider
+            '/connect/',
+            // might be the site, where users choose their oauth provider
             Response::HTTP_TEMPORARY_REDIRECT
         );
     }

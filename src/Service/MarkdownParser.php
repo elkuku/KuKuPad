@@ -8,8 +8,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
 {
-    public function __construct(private PageRepository $pageRepository, private UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        private PageRepository $pageRepository,
+        private UrlGeneratorInterface $urlGenerator
+    ) {
         parent::__construct();
     }
 
@@ -27,21 +29,34 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
         return preg_replace_callback(
             '/\[\[([a-zA-Z0-9\s\-]+)\]\]/',
             function ($link) {
-                $page = $this->pageRepository->findOneBySlug(Slugger::slugify($link[1]));
+                $page = $this->pageRepository->findOneBySlug(
+                    Slugger::slugify($link[1])
+                );
 
                 if (!$page) {
-                    $url = $this->urlGenerator->generate('page_new', ['title' => $link[1]]);
+                    $url = $this->urlGenerator->generate(
+                        'page_new',
+                        ['title' => $link[1]]
+                    );
 
                     $linkText = $link[1];
                     $cssClass = 'text-danger';
                 } else {
-                    $url = $this->urlGenerator->generate('wiki', ['slug' => $page->getSlug()]);
+                    $url = $this->urlGenerator->generate(
+                        'wiki',
+                        ['slug' => $page->getSlug()]
+                    );
 
                     $linkText = $link[1];
                     $cssClass = '';
                 }
 
-                return sprintf('<a class="%s" href="%s">%s</a>', $cssClass, $url, $linkText);
+                return sprintf(
+                    '<a class="%s" href="%s">%s</a>',
+                    $cssClass,
+                    $url,
+                    $linkText
+                );
             },
             $text
         );
