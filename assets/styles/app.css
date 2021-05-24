@@ -1,0 +1,15 @@
+body {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+    background-color: #d0d0d0;
+}
+
+.breadcrumb {
+    background-color: #4d4d4d;
+    color: #9fbd00;
+}
+
+a.external {
+    background: url(../images/external.png) center right no-repeat;
+    padding-right: 13px;
+}

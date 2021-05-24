@@ -12,7 +12,7 @@
         "knpuniversity/oauth2-client-bundle": "2.*",
         "league/oauth2-google": "^3.0",
         "mhujer/breadcrumbs-bundle": "^1.5",
-        "sensio/framework-extra-bundle": "^5.1",
+        "sensio/framework-extra-bundle": "^6.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.*",
         "symfony/console": "5.*",
@@ -39,7 +39,7 @@
         "symfony/yaml": "5.*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
+        "roave/security-advisories": "dev-latest",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
