@@ -50,8 +50,6 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param Request $request
-     *
      * @return bool
      */
     public function supports(Request $request)
@@ -61,8 +59,6 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param Request $request
-     *
      * @return \League\OAuth2\Client\Token\AccessToken|mixed
      */
     public function getCredentials(Request $request)
@@ -74,7 +70,6 @@ class GoogleAuthenticator extends SocialAuthenticator
 
     /**
      * @param mixed                 $credentials
-     * @param UserProviderInterface $userProvider
      *
      * @return User|null|object|\Symfony\Component\Security\Core\User\UserInterface
      */
@@ -109,8 +104,6 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param Request        $request
-     * @param TokenInterface $token
      * @param string         $providerKey
      *
      * @return null|Response
@@ -126,8 +119,6 @@ class GoogleAuthenticator extends SocialAuthenticator
     }
 
     /**
-     * @param Request                 $request
-     * @param AuthenticationException $exception
      *
      * @return null|Response
      */
@@ -142,9 +133,7 @@ class GoogleAuthenticator extends SocialAuthenticator
      * Called when authentication is needed, but it's not sent.
      * This redirects to the 'login'.
      *
-     * @param Request                      $request
      * @param AuthenticationException|null $authException
-     *
      * @return RedirectResponse
      */
     public function start(Request $request, AuthenticationException $authException = null)

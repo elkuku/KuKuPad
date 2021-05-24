@@ -31,14 +31,12 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
 
         $text = str_replace('<a href', '<a class="external" href', $text);
 
-        $text = $this->replaceLocalLink($text);
-
-        return $text;
+        return $this->replaceLocalLink($text);
     }
 
     private function replaceLocalLink($text): string
     {
-        $text = preg_replace_callback(
+        return preg_replace_callback(
             '/\[\[([a-zA-Z0-9\s\-]+)\]\]/',
             function ($link) {
                 $page = $this->pageRepository->findOneBySlug(Slugger::slugify($link[1]));
@@ -59,7 +57,5 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
             },
             $text
         );
-
-        return $text;
     }
 }
