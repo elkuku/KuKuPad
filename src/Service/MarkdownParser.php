@@ -8,21 +8,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    /**
-     * @var PageRepository
-     */
-    private $pageRepository;
-
-    public function __construct(PageRepository $pageRepository, UrlGeneratorInterface $urlGenerator)
+    public function __construct(private PageRepository $pageRepository, private UrlGeneratorInterface $urlGenerator)
     {
         parent::__construct();
-        $this->urlGenerator = $urlGenerator;
-        $this->pageRepository = $pageRepository;
     }
 
     public function transform($text)

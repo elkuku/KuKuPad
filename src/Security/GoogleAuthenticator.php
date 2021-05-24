@@ -22,31 +22,8 @@ class GoogleAuthenticator extends SocialAuthenticator
 {
     use TargetPathTrait;
 
-    /**
-     * @var ClientRegistry
-     */
-    private $clientRegistry;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, UserRepository $userRepository, UrlGeneratorInterface $urlGenerator)
+    public function __construct(private ClientRegistry $clientRegistry, private EntityManagerInterface $em, private UserRepository $userRepository, private UrlGeneratorInterface $urlGenerator)
     {
-        $this->clientRegistry = $clientRegistry;
-        $this->em = $em;
-        $this->userRepository = $userRepository;
-        $this->urlGenerator = $urlGenerator;
     }
 
     /**

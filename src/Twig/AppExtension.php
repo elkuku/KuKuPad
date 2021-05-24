@@ -18,14 +18,8 @@ use Twig\TwigFunction;
  */
 class AppExtension extends AbstractExtension
 {
-    /**
-     * @var MarkdownHelper
-     */
-    private $markdownHelper;
-
-    public function __construct(MarkdownHelper $markdownHelper)
+    public function __construct(private MarkdownHelper $markdownHelper)
     {
-        $this->markdownHelper = $markdownHelper;
     }
 
     /**

@@ -12,31 +12,8 @@ use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $cache;
-
-    /**
-     * @var Breadcrumbs
-     */
-    private $breadcrumbs;
-
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-    /**
-     * @var PageRepository
-     */
-    private $pageRepository;
-
-    public function __construct(PageRepository $pageRepository, AdapterInterface $cache, Breadcrumbs $breadcrumbs, UrlGeneratorInterface $urlGenerator)
+    public function __construct(private PageRepository $pageRepository, private AdapterInterface $cache, private Breadcrumbs $breadcrumbs, private UrlGeneratorInterface $urlGenerator)
     {
-        $this->cache = $cache;
-        $this->breadcrumbs = $breadcrumbs;
-        $this->urlGenerator = $urlGenerator;
-        $this->pageRepository = $pageRepository;
     }
 
     public static function getSubscribedEvents(): array
@@ -68,7 +45,7 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 
         try {
             $item = $this->cache->getItem('breadcrumbs');
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             return;
         }
 

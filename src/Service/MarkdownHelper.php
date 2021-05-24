@@ -7,20 +7,8 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class MarkdownHelper
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $cache;
-
-    /**
-     * @var MarkdownInterface
-     */
-    private $markdown;
-
-    public function __construct(AdapterInterface $cache, MarkdownInterface $markdown)
+    public function __construct(private AdapterInterface $cache, private MarkdownInterface $markdown)
     {
-        $this->cache = $cache;
-        $this->markdown = $markdown;
     }
 
     public function parse(string $source): string
