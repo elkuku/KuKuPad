@@ -8,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/", name="default")
-     */
+    #[Route(path: '/', name: 'default')]
     public function index(): Response
     {
         if ($this->isGranted('ROLE_READER')) {
