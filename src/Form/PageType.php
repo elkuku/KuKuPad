@@ -19,7 +19,7 @@ class PageType extends AbstractType
                 [
                     'attr'       => ['rows' => 10],
                     'label'      => 'label.content',
-                    'block_name' => 'editor',
+                    // 'block_name' => 'editor',
                 ]
             );
     }
