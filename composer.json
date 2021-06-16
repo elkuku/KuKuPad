@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "knplabs/knp-markdown-bundle": "^1.8",
         "knpuniversity/oauth2-client-bundle": "2.*",
         "league/oauth2-google": "^3.0",
@@ -40,7 +41,6 @@
         "symfony/yaml": "5.*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "rector/rector": "^0.11.5",
         "roave/security-advisories": "dev-latest",
         "symfony/debug-pack": "*",
