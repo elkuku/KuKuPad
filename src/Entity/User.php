@@ -23,6 +23,9 @@ class User implements UserInterface
     #[Column(type: 'string', length: 255)]
     private string $roles = '';
 
+    #[Column(type: 'string', length: 100, nullable: true)]
+    private ?string $googleId = '';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,5 +106,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
+
+        return $this;
     }
 }
