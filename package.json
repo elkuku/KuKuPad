@@ -5,7 +5,7 @@
         "bootstrap": "^4.5.0",
         "core-js": "^3.0.0",
         "file-loader": "^6.0.0",
-        "highlight.js": "^10.0.3",
+        "highlight.js": "^11.0.1",
         "jquery": "^3.5.1",
         "open-iconic": "^1.1.1",
         "popper.js": "^1.16.1",

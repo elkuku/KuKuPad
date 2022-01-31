@@ -1,16 +1,14 @@
 import SimpleMDE from 'simplemde'
+
 require('simplemde/dist/simplemde.min.css')
 
-const simplemde = new SimpleMDE()
-
-
+const simplemde = new SimpleMDE({forceSync: true, spellChecker: false})
 
 // const $ = require('jquery')
 // const hljs = require('highlight.js')
 //
 // require('../css/editor.css')
 // require('highlight.js/styles/a11y-dark.css')
-
 
 // const jsData = $('#js-data')
 //
@@ -28,11 +26,11 @@ const simplemde = new SimpleMDE()
 //             function (r) {
 //                 out.html(r.data).removeClass('loading')
 //                 hljs.highlightBlock(out)
-                // document.querySelectorAll('pre code').forEach((block) => {
-                //     hljs.highlightBlock(block);
-                // });
-            // }
-        // )
-    // }
+// document.querySelectorAll('pre code').forEach((block) => {
+//     hljs.highlightBlock(block);
+// });
+// }
+// )
+// }
 // })
 

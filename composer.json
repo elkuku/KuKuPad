@@ -8,11 +8,16 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "doctrine/annotations": "^1.0",
+        "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.11",
         "knplabs/knp-markdown-bundle": "^1.8",
         "knpuniversity/oauth2-client-bundle": "2.*",
         "league/oauth2-google": "^3.0",
         "mhujer/breadcrumbs-bundle": "^1.5",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.*",
@@ -27,32 +32,45 @@
         "symfony/mailer": "5.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.*",
-        "symfony/orm-pack": "*",
         "symfony/process": "5.*",
+        "symfony/property-access": "5.3.*",
+        "symfony/property-info": "5.3.*",
+        "symfony/proxy-manager-bridge": "5.3.*",
         "symfony/runtime": "5.3.*",
         "symfony/security-bundle": "5.*",
-        "symfony/serializer-pack": "*",
+        "symfony/serializer": "5.3.*",
         "symfony/string": "5.*",
         "symfony/translation": "5.*",
-        "symfony/twig-pack": "*",
+        "symfony/twig-bundle": "5.3.*",
         "symfony/validator": "5.*",
         "symfony/web-link": "5.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "5.*"
+        "symfony/yaml": "5.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.11.5",
         "roave/security-advisories": "dev-latest",
-        "symfony/debug-pack": "*",
+        "symfony/browser-kit": "^5.3",
+        "symfony/css-selector": "^5.3",
+        "symfony/debug-bundle": "^5.3",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*"
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/stopwatch": "^5.3",
+        "symfony/web-profiler-bundle": "^5.3"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {

@@ -14,10 +14,9 @@ security:
             security: false
         main:
             lazy: true
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
-                    - App\Security\GoogleAuthenticator
+            custom_authenticators:
+                - App\Security\LoginFormAuthenticator
+                - App\Security\GoogleAuthenticator
             entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
