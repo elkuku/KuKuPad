@@ -2,34 +2,29 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use App\Repository\PageRepository;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
- */
+#[Entity(repositoryClass: PageRepository::class)]
 class Page
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[Id, GeneratedValue(strategy: 'AUTO')]
+    #[Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $title = '';
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $slug;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $slug = '';
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $text;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $text = '';
 
     public function getId(): ?int
     {

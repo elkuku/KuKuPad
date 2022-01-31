@@ -2,30 +2,26 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+#[Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[Id, GeneratedValue(strategy: 'AUTO')]
+    #[Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private $email;
+    #[Column(type: 'string', length: 180, unique: true)]
+    private ?string $email = '';
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $roles = [];
+    #[Column(type: 'string', length: 255)]
+    private string $roles = '';
 
     public function getId(): ?int
     {
@@ -64,9 +60,11 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = is_string($this->roles)
-            ? json_decode($this->roles, true)
-            : $this->roles;
+        // $roles = is_string($this->roles)
+        //     ? json_decode($this->roles, true)
+        //     : $this->roles;
+
+        $roles = json_decode($this->roles, true);
 
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
