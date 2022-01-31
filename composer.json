@@ -112,7 +112,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "6.*"
+            "require": "6.*",
+            "docker": true
         }
     }
 }

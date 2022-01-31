@@ -6,6 +6,7 @@ use App\Entity\Page;
 use App\Form\PageType;
 use App\Repository\PageRepository;
 use App\Service\Slugger;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,8 +36,9 @@ class PageController extends AbstractController
         'POST',
     ])]
     public function new(
+        string $title,
         Request $request,
-        string $title
+        EntityManagerInterface $entityManager,
     ): Response {
         $page = new Page();
         if ($title) {
@@ -46,7 +48,6 @@ class PageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $page->setSlug(Slugger::slugify($page->getTitle()));
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($page);
             $entityManager->flush();
 
@@ -97,14 +98,15 @@ class PageController extends AbstractController
     #[Route(path: '/{id}/edit', name: 'page_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
-        Page $page
+        Page $page,
+        EntityManagerInterface $entityManager,
     ): Response {
         $form = $this->createForm(PageType::class, $page);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $page->setSlug(Slugger::slugify($page->getTitle()));
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('wiki', ['slug' => $page->getSlug()]);
         }
@@ -121,14 +123,14 @@ class PageController extends AbstractController
     #[Route(path: '/{id}', name: 'page_delete', methods: ['DELETE'])]
     public function delete(
         Request $request,
-        Page $page
+        Page $page,
+        EntityManagerInterface $entityManager,
     ): Response {
         if ($this->isCsrfTokenValid(
             'delete'.$page->getId(),
             $request->request->get('_token')
         )
         ) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($page);
             $entityManager->flush();
         }
