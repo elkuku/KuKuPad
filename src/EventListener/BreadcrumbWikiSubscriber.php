@@ -3,8 +3,8 @@
 namespace App\EventListener;
 
 use App\Repository\PageRepository;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -14,7 +14,7 @@ class BreadcrumbWikiSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private PageRepository $pageRepository,
-        private AdapterInterface $cache,
+        private CacheItemPoolInterface $cache,
         private Breadcrumbs $breadcrumbs,
         private UrlGeneratorInterface $urlGenerator
     ) {

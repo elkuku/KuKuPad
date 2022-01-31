@@ -3,12 +3,12 @@
 namespace App\Service;
 
 use Michelf\MarkdownInterface;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 class MarkdownHelper
 {
     public function __construct(
-        private AdapterInterface $cache,
+        private CacheItemPoolInterface $cache,
         private MarkdownInterface $markdown
     ) {
     }

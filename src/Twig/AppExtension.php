@@ -37,12 +37,6 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function getFunctions()
-    {
-        return [
-        ];
-    }
-
     /**
      * Transforms the given Markdown content into HTML content.
      */
