@@ -30,7 +30,6 @@ class WikiController extends AbstractController
             'page/show.html.twig',
             [
                 'page'          => $page,
-                'default_title' => $_ENV['APP_WIKI_NAME'],
             ]
         );
     }

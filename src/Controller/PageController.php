@@ -18,9 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends AbstractController
 {
     #[Route(path: '/', name: 'page_index', methods: ['GET'])]
-    public function index(
-        PageRepository $pageRepository
-    ): Response {
+    public function index(PageRepository $pageRepository): Response
+    {
         return $this->render(
             'page/index.html.twig',
             [
@@ -62,14 +61,12 @@ class PageController extends AbstractController
     }
 
     #[Route(path: '/{id}', name: 'page_show', methods: ['GET'])]
-    public function show(
-        Page $page
-    ): Response {
+    public function show(Page $page): Response
+    {
         return $this->render(
             'page/show.html.twig',
             [
-                'page'          => $page,
-                'default_title' => $_ENV['APP_WIKI_NAME'],
+                'page' => $page,
             ]
         );
     }
@@ -87,8 +84,7 @@ class PageController extends AbstractController
         return $this->render(
             'page/show.html.twig',
             [
-                'page'          => $page,
-                'default_title' => $_ENV['APP_WIKI_NAME'],
+                'page' => $page,
             ]
         );
     }
