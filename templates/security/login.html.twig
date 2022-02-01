@@ -3,6 +3,9 @@
 {% block title %}{{ parent() }} - Log in!{% endblock %}
 
 {% block body %}
+    <div class="float-right">
+        <a href="{{ path('connect_google_start') }}" class="signin-provider-google">{{ 'Google Login'|trans }}</a>
+    </div>
 
     <h1 class="h3 mb-3 font-weight-normal">{{ 'Please sign in'|trans }}</h1>
 
@@ -23,8 +26,5 @@
             </button>
         </form>
     {% else %}
-        <div class="signin-providers">
-            <a href="{{ path('connect_google_start') }}" class="signin-provider-google">{{ 'Google Login'|trans }}</a>
-        </div>
     {% endif %}
 {% endblock %}

@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Repository\AgentRepository;
 use App\Repository\PageRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -15,7 +14,7 @@ class MarkdownParser extends \Knp\Bundle\MarkdownBundle\Parser\MarkdownParser
         parent::__construct();
     }
 
-    public function transform($text)
+    public function transform($text): string
     {
         $text = parent::transform($text);
 
