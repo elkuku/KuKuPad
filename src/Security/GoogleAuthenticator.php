@@ -72,7 +72,7 @@ class GoogleAuthenticator extends AbstractAuthenticator
 
         // @todo remove: Fetch user by email
         if ($user = $this->userRepository->findOneBy(
-            ['identifier' => $googleUser->getEmail()]
+            ['email' => $googleUser->getEmail()]
         )
         ) {
             // @todo remove: Update existing users google id
@@ -80,7 +80,7 @@ class GoogleAuthenticator extends AbstractAuthenticator
         } else {
             // Register new user
             $user = (new User())
-                ->setUserIdentifier($googleUser->getEmail())
+                ->setEmail($googleUser->getEmail())
                 ->setGoogleId($googleUser->getId());
         }
 
