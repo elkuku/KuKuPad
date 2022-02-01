@@ -35,9 +35,6 @@ class SecurityController extends AbstractController
         );
     }
 
-    /**
-     * @throws \Exception
-     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

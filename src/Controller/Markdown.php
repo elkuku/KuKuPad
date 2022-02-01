@@ -13,12 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/markdown')]
 class Markdown extends AbstractController
 {
-    /**
-     * Converts a markdown string to HTML.
-     *
-     * @IsGranted("ROLE_EDITOR")
-     */
     #[Route(path: '/preview', name: 'markdown_preview')]
+    #[IsGranted('ROLE_EDITOR')]
     public function preview(
         Request $request,
         MarkdownHelper $markdownHelper
@@ -33,10 +29,8 @@ class Markdown extends AbstractController
         );
     }
 
-    /**
-     * @IsGranted("ROLE_EDITOR")
-     */
     #[Route(path: '/clearcache', name: 'markdown_clear_cache')]
+    #[IsGranted('ROLE_EDITOR')]
     public function clearCache(
         MarkdownHelper $markdownHelper
     ): RedirectResponse {

@@ -13,10 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_EDITOR")
- */
 #[Route(path: '/page')]
+#[IsGranted('ROLE_EDITOR')]
 class PageController extends AbstractController
 {
     #[Route(path: '/', name: 'page_index', methods: ['GET'])]
